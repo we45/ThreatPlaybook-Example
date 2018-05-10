@@ -1,0 +1,7 @@
+graph LR
+	user(User with Client Software)-->|username/password|login(Login with Username/Password or Token)
+	login(Login with Username/Password or Token)-->|customer PII|search(Search for customer by Name)
+	login(Login with Username/Password or Token)-->|Customer PII Documents|upload_file(Upload Customer Information Docs)
+	upload_file(Upload Customer Information Docs)-->|Customer PII Documents|upload_bucket(Customer PII Documents)
+	login(Login with Username/Password or Token)-->|Customer ID|get_customer_by_id(Get Customer Information by Customer ID)
+	login(Login with Username/Password or Token)-->|Customer PII|register_customer(End-User register new customer)

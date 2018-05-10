@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20180510 06:41:25.403" generator="Robot 3.0.4 (Python 2.7.13 on darwin)">
+<suite source="/Users/abhaybhargav/Documents/Code/Python/TPExample/Simple-API/SecurityTest.robot" id="s1" name="SecurityTest">
+<test id="s1-t1" name="Manage Entities">
+<kw name="Load Entity File" library="ThreatPlaybook">
+<doc>Loads Entity File. Looks for by default in entities/entities_connections.yml in the CWD.</doc>
+<status status="PASS" endtime="20180510 06:41:25.955" starttime="20180510 06:41:25.941"></status>
+</kw>
+<kw name="Find Or Create Entities" library="ThreatPlaybook">
+<doc>Find or Create Entities. Does not duplicate entities, unless they have changed in someway from a previous occasion</doc>
+<status status="PASS" endtime="20180510 06:41:25.968" starttime="20180510 06:41:25.955"></status>
+</kw>
+<kw name="Find Or Connect Entities" library="ThreatPlaybook">
+<doc>Finds or Connect Entities. Does not duplicate entities, unless they have changed in someway from a previous occasion</doc>
+<status status="PASS" endtime="20180510 06:41:25.994" starttime="20180510 06:41:25.969"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:41:25.994" critical="yes" starttime="20180510 06:41:25.940"></status>
+</test>
+<test id="s1-t2" name="load_test_cases">
+<kw name="Process Test Cases" library="ThreatPlaybook">
+<doc>Processes all test cases in default security_tests directory. If you want to specify a custom location,</doc>
+<status status="PASS" endtime="20180510 06:41:26.059" starttime="20180510 06:41:25.995"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:41:26.059" critical="yes" starttime="20180510 06:41:25.995"></status>
+</test>
+<test id="s1-t3" name="generate threat models">
+<kw name="Find Or Load Cases From Directory" library="ThreatPlaybook">
+<doc>Loads cases from the default cases directory and runs through each file of type yml to load user stories, abuser stories, threat models and linked cases</doc>
+<arguments>
+<arg>link_tests=True</arg>
+</arguments>
+<msg timestamp="20180510 06:41:26.479" level="INFO">{'malware file upload': {'cases': ['template_injection_auto', 'nmap_vulnerability_scan', 'xxe_auto', 'malicious_file_upload'], 'cwe': 434, 'description': 'Upload file with malware that brings down the system or subjects it to ransomware', 'dread': '9,9,9,5,8'}}
+{'compromise amazon s3 bucket': {'cases': ['s3_bucket_public', 'malicious_file_upload'], 'cwe': 287, 'description': 'Attacker would enumerate for Public Bucket Access of Uploaded files and Generic Authenticated Access to AWS', 'dread': '9,9,9,5,8'}, 'file upload attacks': {'cases': ['nmap_vulnerability_scan', 'xxe_auto', 'malicious_file_upload'], 'cwe': '434,611', 'description': 'Upload file with malware that gives you backend access to the Uploaded files, based on malicious file execution', 'dread': '9,9,9,5,8'}, 'injection attacks': {'cases': ['sql_injection_auto', 'template_injection_auto', 'xxe_auto'], 'cwe': '89,90,94,611', 'description': 'User/Attacker would attempt to perform SQL Injection, Command Injection, Template Injection Attacks to compromise the service and gain access to sensitive datasets', 'dread': '10,10,10,10,10'}}
+{'auth token hijack xss': {'cases': ['persistent_xss_manual', 'persistent_xss_zap', 'reflected_xss_zap', 'reflected_xss_manual'], 'cwe': 79, 'description': 'Attacker attempts to steal Auth Token from user with malicious client-side script. Target is any front-end using the API', 'dread': '8,8,8,8,10'}, 'end user weak password': {'cases': ['default_passwords', 'bruteforce_login'], 'cwe': 521, 'description': 'External attacker may be able to bypass user authentication by compromising weak passwords of users', 'dread': '5,10,10,4,9'}, 'end user default password': {'cases': ['default_passwords'], 'cwe': 284, 'description': 'External attacker may be able to bypass user authentication by compromising default passwords of users', 'dread': '9,10,10,8,9'}, 'sql injection user account access': {'cases': ['sql_injection_auto', 'generic_error_messages', 'database_hardening_check'], 'cwe': 89, 'description': 'External Attacker may be able to gain access to user accounts by successfully performing SQL Injection Attacks against some of the unauthenticated API Endpoints in the application', 'dread': '9,9,9,9,7'}, 'auth token hijacking mitm': {'cases': ['ssl_checks'], 'cwe': '295,311', 'description': "Attacker attempts to compromise auth token by gaining access to the end user's auth token by performing Man in the Middle Attacks", 'dread': '7,10,10,5,10'}}</msg>
+<status status="PASS" endtime="20180510 06:41:26.479" starttime="20180510 06:41:26.060"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:41:26.479" critical="yes" starttime="20180510 06:41:26.060"></status>
+</test>
+<test id="s1-t4" name="Create Targets">
+<kw name="Find Or Create Target" library="ThreatPlaybook">
+<doc>Creates a target for security testing</doc>
+<arguments>
+<arg>${TARGET_NAME}</arg>
+<arg>${TARGET_URI}</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:41:26.483" starttime="20180510 06:41:26.480"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:41:26.483" critical="yes" starttime="20180510 06:41:26.480"></status>
+</test>
+<test id="s1-t5" name="Port Scan and Service Enumeration">
+<kw name="Nmap Default Scan" library="RoboNmap">
+<doc>Runs a basic nmap scan on nmap's default 1024 ports. Performs the default scan</doc>
+<arguments>
+<arg>${TARGET_HOST}</arg>
+<arg>file_export=${RESULTS_PATH}/flask.txt</arg>
+</arguments>
+<msg timestamp="20180510 06:41:31.936" level="INFO">NmapReport: started at 1525959686 hosts up 1/1</msg>
+<status status="PASS" endtime="20180510 06:41:31.936" starttime="20180510 06:41:26.484"></status>
+</kw>
+<kw name="Nmap Print Results" library="RoboNmap">
+<doc>Retrieves the results of the most recent results</doc>
+<msg timestamp="20180510 06:41:31.937" level="INFO">NmapHost: [127.0.0.1 (localhost localhost) - up]</msg>
+<msg timestamp="20180510 06:41:31.937" level="INFO">  PORT     STATE         SERVICE</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO">    7/tcp  filtered      echo</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO">   22/tcp  open          ssh</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO">  617/tcp  filtered      sco-dtmgr</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO">  631/tcp  open          ipp</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO">  880/tcp  filtered      unknown</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO"> 1067/tcp  filtered      instl_boots</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO"> 1077/tcp  filtered      imgames</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO"> 1164/tcp  filtered      qsm-proxy</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO"> 1233/tcp  filtered      univ-appserver</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO"> 2047/tcp  filtered      dls</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO"> 2604/tcp  filtered      ospfd</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO"> 2725/tcp  filtered      msolap-ptp2</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO"> 3007/tcp  filtered      lotusmtap</msg>
+<msg timestamp="20180510 06:41:31.938" level="INFO"> 3071/tcp  filtered      csd-mgmt-port</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 3828/tcp  filtered      neteh</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 4003/tcp  filtered      pxc-splr-ft</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 5050/tcp  open          mmcc</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 5959/tcp  filtered      unknown</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 5998/tcp  filtered      ncd-diag</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 6001/tcp  filtered      X11:1</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 6005/tcp  filtered      X11:5</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 7019/tcp  filtered      doceri-ctl</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 7106/tcp  filtered      unknown</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 7512/tcp  filtered      unknown</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 8084/tcp  filtered      unknown</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 9090/tcp  filtered      zeus-admin</msg>
+<msg timestamp="20180510 06:41:31.939" level="INFO"> 9100/tcp  filtered      jetdirect</msg>
+<msg timestamp="20180510 06:41:31.940" level="INFO">13456/tcp  filtered      unknown</msg>
+<msg timestamp="20180510 06:41:31.940" level="INFO">49152/tcp  filtered      unknown</msg>
+<msg timestamp="20180510 06:41:31.940" level="INFO">49155/tcp  open          unknown</msg>
+<msg timestamp="20180510 06:41:31.940" level="INFO">62078/tcp  filtered      iphone-sync</msg>
+<status status="PASS" endtime="20180510 06:41:31.940" starttime="20180510 06:41:31.937"></status>
+</kw>
+<kw name="Create And Link Recon" library="ThreatPlaybook">
+<doc>Links recon with the following params</doc>
+<arguments>
+<arg>nmap</arg>
+<arg>${TARGET_NAME}</arg>
+<arg>file_name=${RESULTS_PATH}/flask.txt</arg>
+<arg>tags=nmap,</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:41:31.949" starttime="20180510 06:41:31.940"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:41:31.949" critical="yes" starttime="20180510 06:41:26.484"></status>
+</test>
+<test id="s1-t6" name="Directory Bruteforce">
+<kw name="Brute Directories" library="RoboWFuzz">
+<arguments>
+<arg>http://${TARGET_URI}/FUZZ</arg>
+<arg>concur=3</arg>
+<arg>file_name=${RESULTS_PATH}/${WFUZZ_FILE}</arg>
+</arguments>
+<msg timestamp="20180510 06:41:32.064" level="INFO">00001:  C=200     33 L	     134 W	   1418 Ch	  "# directory-list-1.0.txt"</msg>
+<msg timestamp="20180510 06:41:32.065" level="INFO">00002:  C=200     33 L	     134 W	   1418 Ch	  "#"</msg>
+<msg timestamp="20180510 06:41:32.065" level="INFO">00003:  C=200     33 L	     134 W	   1418 Ch	  "# Copyright 2007 James Fisher"</msg>
+<msg timestamp="20180510 06:41:32.065" level="INFO">00004:  C=200     33 L	     134 W	   1418 Ch	  "#"</msg>
+<msg timestamp="20180510 06:41:32.065" level="INFO">00005:  C=200     33 L	     134 W	   1418 Ch	  "# This work is licensed under the Creative Commons"</msg>
+<msg timestamp="20180510 06:41:32.065" level="INFO">00006:  C=200     33 L	     134 W	   1418 Ch	  "# Attribution-Share Alike 3.0 License. To view a copy of this"</msg>
+<msg timestamp="20180510 06:41:32.066" level="INFO">00007:  C=200     33 L	     134 W	   1418 Ch	  "# license, visit http://creativecommons.org/licenses/by-sa/3.0/"</msg>
+<msg timestamp="20180510 06:41:32.066" level="INFO">00008:  C=200     33 L	     134 W	   1418 Ch	  "# or send a letter to Creative Commons, 171 Second Street,"</msg>
+<msg timestamp="20180510 06:41:32.067" level="INFO">00009:  C=200     33 L	     134 W	   1418 Ch	  "# Suite 300, San Francisco, California, 94105, USA."</msg>
+<msg timestamp="20180510 06:41:32.067" level="INFO">00010:  C=200     33 L	     134 W	   1418 Ch	  "#"</msg>
+<msg timestamp="20180510 06:41:32.068" level="INFO">00011:  C=200     33 L	     134 W	   1418 Ch	  "# Unordered case sensative list, where entries were found"</msg>
+<msg timestamp="20180510 06:41:32.068" level="INFO">00012:  C=200     33 L	     134 W	   1418 Ch	  "# on atleast 2 host.  This was the first draft of the list."</msg>
+<msg timestamp="20180510 06:41:32.068" level="INFO">00013:  C=200     33 L	     134 W	   1418 Ch	  "#"</msg>
+<msg timestamp="20180510 06:41:32.068" level="INFO">00014:  C=200     33 L	     134 W	   1418 Ch	  ""</msg>
+<msg timestamp="20180510 06:41:32.088" level="INFO">00042:  C=405      4 L	      23 W	    178 Ch	  "search"</msg>
+<msg timestamp="20180510 06:41:40.343" level="INFO">05038:  C=405      4 L	      23 W	    178 Ch	  "login"</msg>
+<msg timestamp="20180510 06:42:02.100" level="FAIL">Test timeout 30 seconds exceeded.</msg>
+<status status="FAIL" endtime="20180510 06:42:02.100" starttime="20180510 06:41:31.951"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" endtime="20180510 06:42:02.101" critical="yes" starttime="20180510 06:41:31.950">Test timeout 30 seconds exceeded.</status>
+</test>
+<test id="s1-t7" name="Link Dir Brute Result">
+<kw name="Create And Link Recon" library="ThreatPlaybook">
+<doc>Links recon with the following params</doc>
+<arguments>
+<arg>wfuzz</arg>
+<arg>${TARGET_NAME}</arg>
+<arg>file_name=${RESULTS_PATH}/${WFUZZ_FILE}</arg>
+<arg>tags=wfuzz,</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:02.110" starttime="20180510 06:42:02.102"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:42:02.110" critical="yes" starttime="20180510 06:42:02.102"></status>
+</test>
+<test id="s1-t8" name="Initialize ZAP">
+<kw name="Start Gui Zap" library="RoboZap">
+<doc>Start OWASP ZAP with a GUI</doc>
+<arguments>
+<arg>${ZAP_PATH}</arg>
+</arguments>
+<msg timestamp="20180510 06:42:12.120" level="INFO">/Applications/OWASP_ZAP.app/Contents/Java/zap.sh -config api.disablekey=true -port 8090</msg>
+<status status="PASS" endtime="20180510 06:42:12.120" starttime="20180510 06:42:02.111"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>10</arg>
+</arguments>
+<msg timestamp="20180510 06:42:22.122" level="INFO">Slept 10 seconds</msg>
+<status status="PASS" endtime="20180510 06:42:22.122" starttime="20180510 06:42:12.121"></status>
+</kw>
+<kw name="Zap Open Url" library="RoboZap">
+<doc>Invoke URLOpen with ZAP</doc>
+<arguments>
+<arg>http://${TARGET_URI}</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:26.157" starttime="20180510 06:42:22.123"></status>
+</kw>
+<tags>
+<tag>zap_init</tag>
+</tags>
+<status status="PASS" endtime="20180510 06:42:26.158" critical="yes" starttime="20180510 06:42:02.111"></status>
+</test>
+<test id="s1-t9" name="Authenticate to Web Service ZAP">
+<kw name="Post" library="REST">
+<doc>Make a ``POST`` request call to a specified ``endpoint``.</doc>
+<arguments>
+<arg>/login</arg>
+<arg>{"username": "admin", "password": "admin123"}</arg>
+</arguments>
+<assign>
+<var>&amp;{res}</var>
+</assign>
+<msg timestamp="20180510 06:42:26.204" level="INFO">&amp;{res} = { seconds=0.012697 | status=200 | body={u'Authenticated': True, u'User': u'admin'} | headers={'Content-Length': '40', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6...</msg>
+<status status="PASS" endtime="20180510 06:42:26.204" starttime="20180510 06:42:26.159"></status>
+</kw>
+<kw name="Integer" library="REST">
+<arguments>
+<arg>response status</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:26.206" starttime="20180510 06:42:26.205"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${TOKEN}</arg>
+<arg>${res.headers["Authorization"]}</arg>
+</arguments>
+<msg timestamp="20180510 06:42:26.209" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3ZTQ1IiwiaWF0IjoxNTI1OTU5NzM5LCJ1c2VyIjoiYWRtaW4iLCJleHAiOjE1MjU5NzQxMzksIm5iZiI6MTUyNTk1OTczOX0.LxUEEpOlpWV1uC6vVKWJ0btZlLQnBdtXWuIBEv6MP5k</msg>
+<status status="PASS" endtime="20180510 06:42:26.209" starttime="20180510 06:42:26.206"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:42:26.210" critical="yes" starttime="20180510 06:42:26.158"></status>
+</test>
+<test id="s1-t10" name="Get Customer by ID">
+<kw type="setup" name="Set Headers" library="REST">
+<arguments>
+<arg>{ "Authorization": "${TOKEN}" }</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:26.213" starttime="20180510 06:42:26.213"></status>
+</kw>
+<kw name="Get" library="REST">
+<doc>Make a ``GET`` request call to a specified ``endpoint``.</doc>
+<arguments>
+<arg>/get/2</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:26.232" starttime="20180510 06:42:26.214"></status>
+</kw>
+<kw name="Integer" library="REST">
+<arguments>
+<arg>response status</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:26.233" starttime="20180510 06:42:26.232"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:42:26.233" critical="yes" starttime="20180510 06:42:26.211"></status>
+</test>
+<test id="s1-t11" name="Post Fetch Customer">
+<kw type="setup" name="Set Headers" library="REST">
+<arguments>
+<arg>{ "Authorization": "${TOKEN}" }</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:26.236" starttime="20180510 06:42:26.235"></status>
+</kw>
+<kw name="Post" library="REST">
+<doc>Make a ``POST`` request call to a specified ``endpoint``.</doc>
+<arguments>
+<arg>/fetch/customer</arg>
+<arg>{ "id": 3 }</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:26.255" starttime="20180510 06:42:26.237"></status>
+</kw>
+<kw name="Integer" library="REST">
+<arguments>
+<arg>response status</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:26.256" starttime="20180510 06:42:26.255"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:42:26.257" critical="yes" starttime="20180510 06:42:26.234"></status>
+</test>
+<test id="s1-t12" name="Search Customer by Username">
+<kw type="setup" name="Set Headers" library="REST">
+<arguments>
+<arg>{ "Authorization": "${TOKEN}" }</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:26.259" starttime="20180510 06:42:26.258"></status>
+</kw>
+<kw name="Post" library="REST">
+<doc>Make a ``POST`` request call to a specified ``endpoint``.</doc>
+<arguments>
+<arg>/search</arg>
+<arg>{ "search": "dleon" }</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:26.280" starttime="20180510 06:42:26.259"></status>
+</kw>
+<kw name="Integer" library="REST">
+<arguments>
+<arg>response status</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:42:26.284" starttime="20180510 06:42:26.282"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:42:26.285" critical="yes" starttime="20180510 06:42:26.257"></status>
+</test>
+<test id="s1-t13" name="ZAP Contextualize">
+<kw name="Zap Define Context" library="RoboZap">
+<doc>Add Target to a context and use the context to perform all scanning/spidering operations</doc>
+<arguments>
+<arg>${CONTEXT}</arg>
+<arg>http://${TARGET_URI}</arg>
+</arguments>
+<assign>
+<var>${contextid}</var>
+</assign>
+<msg timestamp="20180510 06:42:32.455" level="INFO">${contextid} = 2</msg>
+<status status="PASS" endtime="20180510 06:42:32.455" starttime="20180510 06:42:26.286"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${CONTEXT_ID}</arg>
+<arg>${contextid}</arg>
+</arguments>
+<msg timestamp="20180510 06:42:32.457" level="INFO">${CONTEXT_ID} = 2</msg>
+<status status="PASS" endtime="20180510 06:42:32.457" starttime="20180510 06:42:32.456"></status>
+</kw>
+<tags>
+<tag>zap_context</tag>
+</tags>
+<status status="PASS" endtime="20180510 06:42:32.457" critical="yes" starttime="20180510 06:42:26.285"></status>
+</test>
+<test id="s1-t14" name="ZAP Active Scan">
+<kw name="Zap Start Ascan" library="RoboZap">
+<doc>Initiates ZAP Active Scan on the target url and context</doc>
+<arguments>
+<arg>${CONTEXT_ID}</arg>
+<arg>http://${TARGET_URI}</arg>
+<arg>${SCANPOLICY}</arg>
+</arguments>
+<assign>
+<var>${scan_id}</var>
+</assign>
+<msg timestamp="20180510 06:42:34.533" level="INFO">${scan_id} = 0</msg>
+<status status="PASS" endtime="20180510 06:42:34.533" starttime="20180510 06:42:32.458"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${SCAN_ID}</arg>
+<arg>${scan_id}</arg>
+</arguments>
+<msg timestamp="20180510 06:42:34.536" level="INFO">${SCAN_ID} = 0</msg>
+<status status="PASS" endtime="20180510 06:42:34.536" starttime="20180510 06:42:34.534"></status>
+</kw>
+<kw name="Zap Scan Status" library="RoboZap">
+<doc>Fetches the status for the spider id provided by the user</doc>
+<arguments>
+<arg>${scan_id}</arg>
+</arguments>
+<msg timestamp="20180510 06:42:34.575" level="INFO">Scan running at 7%</msg>
+<msg timestamp="20180510 06:42:44.598" level="INFO">Scan running at 31%</msg>
+<msg timestamp="20180510 06:42:54.634" level="INFO">Scan running at 48%</msg>
+<msg timestamp="20180510 06:43:04.698" level="INFO">Scan running at 52%</msg>
+<msg timestamp="20180510 06:43:14.752" level="INFO">Scan running at 53%</msg>
+<msg timestamp="20180510 06:43:24.805" level="INFO">Scan running at 53%</msg>
+<msg timestamp="20180510 06:43:34.825" level="INFO">Scan running at 72%</msg>
+<msg timestamp="20180510 06:43:44.851" level="INFO">Scan running at 72%</msg>
+<msg timestamp="20180510 06:43:54.878" level="INFO">Scan running at 94%</msg>
+<msg timestamp="20180510 06:44:04.905" level="INFO">Scan running at 94%</msg>
+<status status="PASS" endtime="20180510 06:44:14.915" starttime="20180510 06:42:34.536"></status>
+</kw>
+<tags>
+<tag>zap_scan</tag>
+</tags>
+<status status="PASS" endtime="20180510 06:44:14.915" critical="yes" starttime="20180510 06:42:32.458"></status>
+</test>
+<test id="s1-t15" name="ZAP Generate Report">
+<kw name="Zap Export Report" library="RoboZap">
+<doc>This functionality works on ZAP 2.7.0 only. It leverages the Export Report Library to generate a report.</doc>
+<arguments>
+<arg>${RESULTS_PATH}/${ZAP_REPORT_FILE}</arg>
+<arg>${REPORT_FORMAT}</arg>
+<arg>${REPORT_TITLE}</arg>
+<arg>${REPORT_AUTHOR}</arg>
+</arguments>
+<status status="PASS" endtime="20180510 06:44:15.179" starttime="20180510 06:44:14.916"></status>
+</kw>
+<tags>
+<tag>zap_generate_report</tag>
+</tags>
+<status status="PASS" endtime="20180510 06:44:15.180" critical="yes" starttime="20180510 06:44:14.915"></status>
+</test>
+<test id="s1-t16" name="ZAP Die">
+<kw name="Zap Shutdown" library="RoboZap">
+<doc>Shutdown process for ZAP Scanner</doc>
+<status status="PASS" endtime="20180510 06:44:15.193" starttime="20180510 06:44:15.181"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>3</arg>
+</arguments>
+<msg timestamp="20180510 06:44:18.195" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" endtime="20180510 06:44:18.196" starttime="20180510 06:44:15.194"></status>
+</kw>
+<tags>
+<tag>zap_kill</tag>
+</tags>
+<status status="PASS" endtime="20180510 06:44:18.196" critical="yes" starttime="20180510 06:44:15.180"></status>
+</test>
+<test id="s1-t17" name="Write ZAP Results to DB">
+<kw name="Parse Zap Json" library="ThreatPlaybook">
+<doc>will parse a ZAP JSON file and load  into the DB as vulnerabilities. The Vulnerabilities link with the Threat Models by CWE</doc>
+<arguments>
+<arg>${RESULTS_PATH}/${ZAP_REPORT_FILE}</arg>
+<arg>${TARGET_NAME}</arg>
+</arguments>
+<msg timestamp="20180510 06:44:18.228" level="INFO">Target object</msg>
+<status status="PASS" endtime="20180510 06:44:18.228" starttime="20180510 06:44:18.198"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:44:18.228" critical="yes" starttime="20180510 06:44:18.197"></status>
+</test>
+<test id="s1-t18" name="Generate Threat Maps">
+<kw name="Generate Threat Maps" library="ThreatPlaybook">
+<doc>Generates Threat Maps to the threat maps directory within results. Will create it if not already there</doc>
+<status status="PASS" endtime="20180510 06:44:21.404" starttime="20180510 06:44:18.230"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:44:21.405" critical="yes" starttime="20180510 06:44:18.229"></status>
+</test>
+<test id="s1-t19" name="Write Final Report">
+<kw name="Write Markdown Report" library="ThreatPlaybook">
+<doc>Writes a Markdown Report in the results directory of CWD by default</doc>
+<msg timestamp="20180510 06:44:22.332" level="INFO">in file write loop</msg>
+<status status="PASS" endtime="20180510 06:44:22.332" starttime="20180510 06:44:21.407"></status>
+</kw>
+<status status="PASS" endtime="20180510 06:44:22.333" critical="yes" starttime="20180510 06:44:21.406"></status>
+</test>
+<status status="FAIL" endtime="20180510 06:44:22.336" starttime="20180510 06:41:25.406"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="18">Critical Tests</stat>
+<stat fail="1" pass="18">All Tests</stat>
+</total>
+<tag>
+<stat fail="0" pass="1">zap_context</stat>
+<stat fail="0" pass="1">zap_generate_report</stat>
+<stat fail="0" pass="1">zap_init</stat>
+<stat fail="0" pass="1">zap_kill</stat>
+<stat fail="0" pass="1">zap_scan</stat>
+</tag>
+<suite>
+<stat fail="1" id="s1" name="SecurityTest" pass="18">SecurityTest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -1,0 +1,44 @@
+create_customer_profile:
+  description: As an end-user, I would like to create customer profile and upload information to the customer profile. This will have the customer's PII
+  abuse_cases:
+    render api unavailable:
+      description: As a malicious user, I would render the upload and API system unavailable to the organization
+      threat_scenarios:
+        malware file upload:
+          description: Upload file with malware that brings down the system or subjects it to ransomware
+          dread: 9,9,9,5,8
+          cwe: 434
+          cases:
+            - template_injection_auto
+            - nmap_vulnerability_scan
+            - xxe_auto
+            - malicious_file_upload
+    steal customer sensitive files:
+      description: As a malicious user, I would like to steal customer PII from the uploaded files for me to be able to monetize this information
+      threat_scenarios:
+        file upload attacks:
+          description: Upload file with malware that gives you backend access to the Uploaded files, based on malicious file execution
+          dread: 9,9,9,5,8
+          cwe: 434,611
+          cases:
+            - nmap_vulnerability_scan
+            - xxe_auto
+            - malicious_file_upload
+        compromise amazon s3 bucket:
+          description: Attacker would enumerate for Public Bucket Access of Uploaded files and Generic Authenticated Access to AWS
+          dread: 9,9,9,5,8
+          cwe: 287
+          cases:
+            - s3_bucket_public
+            - malicious_file_upload
+        injection attacks:
+          description: User/Attacker would attempt to perform SQL Injection, Command Injection, Template Injection Attacks to compromise the service and gain access to sensitive datasets
+          dread: 10,10,10,10,10
+          cwe: 89,90,94,611
+          cases:
+            - sql_injection_auto
+            - template_injection_auto
+            - xxe_auto
+
+
+

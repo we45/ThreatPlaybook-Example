@@ -1,0 +1,52 @@
+entities:
+  user:
+    description: Public End-User accesses over the Client
+    caption: User with Client Software
+    name: user
+
+  login:
+    description: End-User authenticates username and password
+    caption: Login with Username/Password or Token
+    name: login
+
+  search:
+    description: End-user searches for customer with name
+    caption: Search for customer by Name
+    name: search_customer
+
+  upload_file:
+    description: End-user uploads customer information documents
+    caption: Upload Customer Information Docs
+    name: upload customer file
+
+  upload_bucket:
+    description: S3 Bucket for Uploaded Files
+    caption: Customer PII Documents
+    name: s3_upload_files
+
+  get_customer_by_id:
+    description: Get Customer Information by Customer ID
+    caption: Get Customer Information by Customer ID
+    name: get customer by id
+
+  register_customer:
+    description: End User can register New Customer to the System
+    caption: End-User register new customer
+    name: customer register
+
+  register_user:
+    description: Admin User can register new user to the system
+    caption: Admin user can register new user to the system
+    name: new user register
+
+
+connections:
+  - [user,login,username/password]
+  - [login,search,customer PII]
+  - [login,upload_file,Customer PII Documents]
+  - [upload_file,upload_bucket,Customer PII Documents]
+  - [login,get_customer_by_id, Customer ID]
+  - [login,register_customer,Customer PII]
+
+
+    
