@@ -8,7 +8,7 @@ login_user:
       threat_scenarios:
         sql injection user account access:
           description: External Attacker may be able to gain access to user accounts by successfully performing SQL Injection Attacks against some of the unauthenticated API Endpoints in the application
-          dread: 9,9,9,9,7
+          severity: 3
           cwe: 89
           cases:
             - sql_injection_auto
@@ -16,14 +16,14 @@ login_user:
             - database_hardening_check
         end user weak password:
           description: External attacker may be able to bypass user authentication by compromising weak passwords of users
-          dread: 5,10,10,4,9
+          severity: 2
           cwe: 521
           cases:
             - default_passwords
             - bruteforce_login
         end user default password:
           description: External attacker may be able to bypass user authentication by compromising default passwords of users
-          dread: 9,10,10,8,9
+          severity: 3
           cwe: 284
           cases:
             - default_passwords
@@ -35,7 +35,7 @@ login_user:
             - ssl_checks
         auth token hijack xss:
           description: Attacker attempts to steal Auth Token from user with malicious client-side script. Target is any front-end using the API
-          dread: 8,8,8,8,10
+          severity: 2
           cwe: 79
           cases:
             - persistent_xss_manual

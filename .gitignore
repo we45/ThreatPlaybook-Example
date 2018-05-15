@@ -1,0 +1,11 @@
+
+Simple-API/log.html
+*.xml
+*.html
+*.svg
+*.json
+*.txt
+*.json
+Simple-API/output.xml
+Simple-API/results/*
+*.html

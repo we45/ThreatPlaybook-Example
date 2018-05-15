@@ -118,10 +118,10 @@ Grant the minimum database access that is necessary for the application.
 ### Evidences
 | URL | Parameter | other info & attack |
 |----------|:----------:|:--------:|
-| POST : http://localhost:5050/search | search | The page results were successfully manipulated using the boolean conditions [dleon' AND 8305=8305 AND 'VlTL'='VlTL] and [dleon' AND 7247=4895 AND 'BssY'='BssY]
+| POST : http://localhost:5050/search | search | The page results were successfully manipulated using the boolean conditions [dleon' AND 1361=1361 AND 'vtfQ'='vtfQ] and [dleon' AND 5960=1618 AND 'Dtpn'='Dtpn]
 The parameter value being modified was stripped from the HTML output for the purposes of the comparison.
 Data was returned for the original parameter.
-The vulnerability was detected by successfully restricting the data originally returned, by manipulating the parameter., dleon' AND 8305=8305 AND 'VlTL'='VlTL |
+The vulnerability was detected by successfully restricting the data originally returned, by manipulating the parameter., dleon' AND 1361=1361 AND 'vtfQ'='vtfQ |
 ### Cross Site Scripting (Reflected)
 CWE: 79, Severity: High
 
@@ -189,7 +189,7 @@ Rewrite the background program using proper checking of the size of integer bein
 ### Evidences
 | URL | Parameter | other info & attack |
 |----------|:----------:|:--------:|
-| POST : http://localhost:5050/fetch/customer | id | Potential Integer Overflow.  Status code changed on the input of a long string of random integers., 14131437290276618208136519940147581923305805 |
+| POST : http://localhost:5050/fetch/customer | id | Potential Integer Overflow.  Status code changed on the input of a long string of random integers., 99945105638671108106901850563893412340933543 |
 ### X-Frame-Options Header Not Set
 CWE: 16, Severity: Medium
 
@@ -254,49 +254,24 @@ At "High" threshold this scanner will not alert on client or server error respon
 
 ```
 
-# Nmap 7.60 scan initiated Thu May 10 06:41:26 2018 as: /usr/local/bin/nmap -oX - -vvv --stats-every 1s -oN /Users/abhaybhargav/Documents/Code/Python/TPExample/Simple-API/results/flask.txt localhost
+# Nmap 7.60 scan initiated Sun May 13 18:04:15 2018 as: /usr/local/bin/nmap -oX - -vvv --stats-every 1s -oN /Users/abhaybhargav/Documents/Code/Python/TPExample/Simple-API/results/flask.txt localhost
 Warning: Hostname localhost resolves to 2 IPs. Using 127.0.0.1.
 Nmap scan report for localhost (127.0.0.1)
-Host is up, received conn-refused (0.00027s latency).
+Host is up, received conn-refused (0.00084s latency).
 Other addresses for localhost (not scanned): ::1
-Scanned at 2018-05-10 06:41:26 PDT for 5s
-Not shown: 969 closed ports
-Reason: 969 conn-refused
-PORT      STATE    SERVICE        REASON
-7/tcp     filtered echo           no-response
-22/tcp    open     ssh            syn-ack
-617/tcp   filtered sco-dtmgr      no-response
-631/tcp   open     ipp            syn-ack
-880/tcp   filtered unknown        no-response
-1067/tcp  filtered instl_boots    no-response
-1077/tcp  filtered imgames        no-response
-1164/tcp  filtered qsm-proxy      no-response
-1233/tcp  filtered univ-appserver no-response
-2047/tcp  filtered dls            no-response
-2604/tcp  filtered ospfd          no-response
-2725/tcp  filtered msolap-ptp2    no-response
-3007/tcp  filtered lotusmtap      no-response
-3071/tcp  filtered csd-mgmt-port  no-response
-3828/tcp  filtered neteh          no-response
-4003/tcp  filtered pxc-splr-ft    no-response
-5050/tcp  open     mmcc           syn-ack
-5959/tcp  filtered unknown        no-response
-5998/tcp  filtered ncd-diag       no-response
-6001/tcp  filtered X11:1          no-response
-6005/tcp  filtered X11:5          no-response
-7019/tcp  filtered doceri-ctl     no-response
-7106/tcp  filtered unknown        no-response
-7512/tcp  filtered unknown        no-response
-8084/tcp  filtered unknown        no-response
-9090/tcp  filtered zeus-admin     no-response
-9100/tcp  filtered jetdirect      no-response
-13456/tcp filtered unknown        no-response
-49152/tcp filtered unknown        no-response
-49155/tcp open     unknown        syn-ack
-62078/tcp filtered iphone-sync    no-response
+Scanned at 2018-05-13 18:04:15 PDT for 3s
+Not shown: 498 closed ports, 496 filtered ports
+Reason: 498 conn-refused and 496 no-responses
+PORT      STATE SERVICE      REASON
+22/tcp    open  ssh          syn-ack
+631/tcp   open  ipp          syn-ack
+5050/tcp  open  mmcc         syn-ack
+8090/tcp  open  opsmessaging syn-ack
+9000/tcp  open  cslistener   syn-ack
+49155/tcp open  unknown      syn-ack
 
 Read data files from: /usr/local/bin/../share/nmap
-# Nmap done at Thu May 10 06:41:31 2018 -- 1 IP address (1 host up) scanned in 5.42 seconds
+# Nmap done at Sun May 13 18:04:18 2018 -- 1 IP address (1 host up) scanned in 2.63 seconds
 
 ```
 ### Reconnaissance Tool: wfuzz
