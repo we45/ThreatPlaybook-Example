@@ -31,6 +31,6 @@ six==1.11.0
 strict-rfc3339==0.7
 ThreatPlaybook==0.95
 tzlocal==1.5.1
-urllib3==1.22
+urllib3==1.26.5
 validate-email==1.3
 wfuzz==2.2.9
